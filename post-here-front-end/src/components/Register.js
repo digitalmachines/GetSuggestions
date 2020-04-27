@@ -12,13 +12,13 @@ function RegisterForm(){
             <Form>
                 <FormGroup>
                     <label htmlFor = 'name'>
-                    <FormText>Name:</FormText>
+                        <FormText>Name:</FormText>
                         <input type = 'text' name = 'name' id = 'name' />
                     </label>
                 </FormGroup>
                 <FormGroup>
                     <label htmlFor = 'username'>
-                    <FormText>Username:</FormText>
+                        <FormText>Username:</FormText>
                         <input type = 'text' name = 'username' id = 'username' />
                     </label>
                 </FormGroup>
@@ -30,14 +30,14 @@ function RegisterForm(){
                 </FormGroup>
                 <FormGroup>
                     <label htmlFor='password'>
-                    <FormText>Password:</FormText>
+                        <FormText>Password:</FormText>
                         <input type = 'password' name='password' id='password' />
                     </label>
                 </FormGroup>
                 <FormGroup>
                     <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                         <DropdownToggle caret>
-                            Dropdown
+                            User Role
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem header>User Role</DropdownItem>
