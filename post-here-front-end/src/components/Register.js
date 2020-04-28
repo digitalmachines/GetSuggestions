@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Form, FormGroup, FormText, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap';
 
-function RegisterForm(){
+function Register(){
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
@@ -56,4 +56,4 @@ function RegisterForm(){
         </>
     )
 }
-export default RegisterForm;
+export default Register;
