@@ -1,53 +1,90 @@
 import React, {useState} from 'react';
 import { Form, FormGroup, FormText, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap';
+import axios from 'axios'
+import { useHistory } from "react-router-dom";
 
 function Register(){
-    const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const toggle = () => setDropdownOpen(prevState => !prevState);
+    const [formValues, setFormValues] = useState({
+        name: '',
+        username: '',
+        email: '',
+        password: ''
+    })
 
+    const history = useHistory()
+
+    const handleChange = e=>{
+        e.preventDefault()
+        setFormValues({
+            ...formValues,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const register = e =>{
+        e.preventDefault()
+        console.log(formValues)
+        axios
+        .post('https://post-here-subreddit.herokuapp.com/api/auth/register', formValues)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+    
 
     return(
         <>
-            <Form>
+            <Form onSubmit = {register}>
                 <FormGroup>
                     <FormText>Name:</FormText>
                     <label htmlFor = 'name'>
-                        <input type = 'text' name = 'name' id = 'name' />
+                        <input 
+                            type="text"
+                            name="name"
+                            value={formValues.name}
+                            onChange={handleChange} 
+                        />
                     </label>
                 </FormGroup>
                 <FormGroup>
                     <FormText>Username:</FormText>
                     <label htmlFor = 'username'>
-                        <input type = 'text' name = 'username' id = 'username' />
+                        <input 
+                            type="text"
+                            name="username"
+                            value={formValues.username}
+                            onChange={handleChange}  
+                        />
                     </label>
                 </FormGroup>
                 <FormGroup>
                     <FormText>E-Mail:</FormText>
                     <label htmlFor='email'>
-                        <input type = 'email' name='email' id='email' />
+                        <input 
+                            type="text"
+                            name="email"
+                            value={formValues.email}
+                            onChange={handleChange} 
+                        />
                     </label>
                 </FormGroup>
                 <FormGroup>
                     <FormText>Password:</FormText>
                     <label htmlFor='password'>
-                        <input type = 'password' name='password' id='password' />
+                        <input 
+                            type = 'password' 
+                            name="password"
+                            value={formValues.password}
+                            onChange={handleChange} 
+                        />
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                        <DropdownToggle caret>
-                            User Role
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem header>User Role</DropdownItem>
-                            <DropdownItem>Admin</DropdownItem>
-                            <DropdownItem>User</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                </FormGroup>
-                <FormGroup>
-                    <Button>
+                    <Button type = 'submit'>
                         Submit
                     </Button>
                 </FormGroup>
