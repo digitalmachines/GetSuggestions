@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Form, FormGroup, FormText, Dropdown, DropdownItem, DropdownToggle, DropdownMenu } from 'reactstrap';
+import { Form, FormGroup, FormText, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap';
 
 function RegisterForm(){
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -11,26 +11,26 @@ function RegisterForm(){
         <>
             <Form>
                 <FormGroup>
+                    <FormText>Name:</FormText>
                     <label htmlFor = 'name'>
-                        <FormText>Name:</FormText>
                         <input type = 'text' name = 'name' id = 'name' />
                     </label>
                 </FormGroup>
                 <FormGroup>
+                    <FormText>Username:</FormText>
                     <label htmlFor = 'username'>
-                        <FormText>Username:</FormText>
                         <input type = 'text' name = 'username' id = 'username' />
                     </label>
                 </FormGroup>
                 <FormGroup>
+                    <FormText>E-Mail:</FormText>
                     <label htmlFor='email'>
-                        <FormText>E-Mail:</FormText>
                         <input type = 'email' name='email' id='email' />
                     </label>
                 </FormGroup>
                 <FormGroup>
+                    <FormText>Password:</FormText>
                     <label htmlFor='password'>
-                        <FormText>Password:</FormText>
                         <input type = 'password' name='password' id='password' />
                     </label>
                 </FormGroup>
@@ -45,6 +45,11 @@ function RegisterForm(){
                             <DropdownItem>User</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
+                </FormGroup>
+                <FormGroup>
+                    <Button>
+                        Submit
+                    </Button>
                 </FormGroup>
             </Form>
 
