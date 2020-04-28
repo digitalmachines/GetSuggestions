@@ -7,6 +7,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: token
     },
-    baseURL: 'need the url'
+    baseURL: 'https://post-here-subreddit.herokuapp.com/api/auth'
   });
 };
