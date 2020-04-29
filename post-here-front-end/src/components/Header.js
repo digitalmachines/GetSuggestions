@@ -1,11 +1,15 @@
-import React, { useState } from 'react'; 
+import React, { useState, useContext } from 'react'; 
 import { Link } from 'react-router-dom'; 
 
 import '../styles/Header.scss'; 
 
+import { AppContext } from '../App'; 
+
+
 function Header(props){
 
-    let user = false; 
+    const user = useContext(AppContext); 
+    console.log('This is the user: ', user); 
 
     return(
         <header className="top">
