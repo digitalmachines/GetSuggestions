@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect } from 'react'
 import {fetchUser,fetchPosts} from '../store/actions'
 import {connect} from 'react-redux'
 import NewPostForm from './NewPostForm'
@@ -12,7 +12,6 @@ const Dashboard = (props)=>{
         props.fetchUser(id)
         props.fetchPosts(id)
     },[])
-
 
     return(
         <>
