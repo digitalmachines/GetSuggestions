@@ -1,11 +1,15 @@
-import React, {useState} from 'react';
-import { Form, FormGroup, FormText, Dropdown, DropdownItem, DropdownToggle, DropdownMenu, Button } from 'reactstrap';
+import React, {useState, useContext} from 'react';
+import { Form, FormGroup, FormText, Button } from 'reactstrap';
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
+
+import { LoginContext } from '../App'; 
 
 import '../styles/Register.scss'; 
 
 function Register(){
+
+    const login = useContext(LoginContext); 
 
     const [formValues, setFormValues] = useState({
         name: '',
@@ -14,7 +18,7 @@ function Register(){
         password: ''
     })
 
-    const history = useHistory()
+    const history = useHistory();
 
     const handleChange = e=>{
         e.preventDefault()
@@ -31,6 +35,10 @@ function Register(){
         .post('https://post-here-subreddit.herokuapp.com/api/auth/register', formValues)
         .then(res=>{
             console.log(res)
+            const user = res.response.data; 
+            console.log(user); 
+            login(user); 
+            history.push('/dashboard'); 
         })
         .catch(err=>{
             console.log(err)
@@ -39,7 +47,7 @@ function Register(){
     
     return(
         <>
-            <Form className='register-form' onSubmit = {register}>
+            <Form className='register-form' onSubmit ={register}>
                 <FormGroup>
                     <FormText>Name:</FormText>
                     <label htmlFor = 'name'>
@@ -85,7 +93,7 @@ function Register(){
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <Button type = 'submit' size='lg' color='primary'>
+                    <Button type ='submit' size='lg' color='primary'>
                         Submit
                     </Button>
                 </FormGroup>

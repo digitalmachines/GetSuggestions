@@ -1,12 +1,7 @@
-import React, {useState, useContext} from 'react';
-import LoginForm from './components/Login'
-import Register from './components/Register'
-import './App.css';
-import PrivateRoute from './utils/PrivateRoute'
-import Dashboard from './components/Dashboard'
-//import {BrowserRouter as Router, Route} from 'react-router-dom'
-
+import React, {useState} from 'react';
 import Router from './components/Router'; 
+
+import './App.css';
 
 function App() {
 
@@ -28,11 +23,6 @@ function App() {
             </LogoutContext.Provider>
           </LoginContext.Provider>
         </AppContext.Provider>
-          /* <div className="Landing Page">
-            <Route exact path ='/' component = {LoginForm}/>
-            <Route exact path ='/register' component={Register}/>
-            <PrivateRoute exact path='/protected/:id' component={Dashboard}/>
-          </div> */
   );
 }
 

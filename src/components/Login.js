@@ -3,12 +3,11 @@ import { Form, FormGroup, FormText, Button } from 'reactstrap';
 import {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import {axiosWithAuth} from '../utils/axiosWithAuth'
-import axios from 'axios'
 import { connect } from 'react-redux';
 
 import '../styles/Login.scss'; 
 
-import App, { AppContext, LoginContext, LogoutContext } from '../App'; 
+import { LoginContext } from '../App'; 
 
 function LoginForm(){
 
@@ -48,10 +47,6 @@ function LoginForm(){
           alert('the username or password is incorrect')
         })
       }
-
-    const sendToRegister =()=>{
-        history.push('/register')
-    }
 
     return(
         <>
