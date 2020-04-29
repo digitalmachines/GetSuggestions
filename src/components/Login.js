@@ -12,9 +12,7 @@ import App, { AppContext, LoginContext, LogoutContext } from '../App';
 
 function LoginForm(){
 
-    const status = useContext(AppContext); 
     const loginFunction = useContext(LoginContext); 
-    const logoutFunction = useContext(LogoutContext); 
     
     const [credentials, setCredentials] = useState({
         username: '',
