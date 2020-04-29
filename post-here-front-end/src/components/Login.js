@@ -31,7 +31,8 @@ function LoginForm(){
           console.log(res, 'retrieved the token')
           localStorage.setItem('token', res.data.token)
           localStorage.setItem('id', res.data.user.id) 
-          history.push(`/protected/${res.data.user.id}`)
+          //history.push(`/protected/${res.data.user.id}`)
+          history.push("/dashboard"); 
         })
         .catch(res=>{
           console.log(res)
@@ -72,7 +73,7 @@ function LoginForm(){
                 </FormGroup>
 
                 <FormGroup>
-                    <Button color = 'danger' type='submit'>
+                    <Button color='danger' type='submit' size="lg">
                         Submit
                     </Button>
                 </FormGroup>
