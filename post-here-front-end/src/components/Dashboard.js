@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {fetchUser,fetchPosts} from '../store/actions'
 import {connect} from 'react-redux'
 import NewPostForm from './NewPostForm'
+import PastPosts from './PastPosts'
 
 const Dashboard = (props)=>{
     console.log(props,"dashboard props")
@@ -19,6 +20,10 @@ const Dashboard = (props)=>{
         <h4>fill this out to make a new post</h4>
         <NewPostForm/>
         <h4>Past Posts</h4>
+        {props.posts.length > 0 &&
+            <PastPosts posts = {props.posts}/>
+        }
+        
         </>
     )
 }
