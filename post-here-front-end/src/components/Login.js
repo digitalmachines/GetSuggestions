@@ -6,6 +6,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth'
 import axios from 'axios'
 import { connect } from 'react-redux';
 
+import '../styles/Login.scss'; 
 
 function LoginForm(){
     const [credentials, setCredentials] = useState({
@@ -44,7 +45,7 @@ function LoginForm(){
 
     return(
         <>
-            <Form onSubmit = {login}>
+            <Form className='auth-form' onSubmit = {login}>
 
                 <FormGroup>
                     <FormText>Email:</FormText>
@@ -75,14 +76,11 @@ function LoginForm(){
                         Submit
                     </Button>
                 </FormGroup>
-
             </Form>
-            <p>don't have an account?</p>
-            <Button onClick={sendToRegister}>Click here to make one!</Button>
+            {/* <p>don't have an account?</p>
+            <Button onClick={sendToRegister}>Click here to make one!</Button> */}
         </>
-    )
-}
-
+    ); 
+}; 
 
 export default LoginForm;
-

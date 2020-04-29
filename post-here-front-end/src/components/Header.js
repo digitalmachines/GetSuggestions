@@ -1,7 +1,12 @@
 import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom'; 
 
+import '../styles/Header.scss'; 
+
 function Header(props){
+
+    let user = false; 
+
     return(
         <header className="top">
             <nav>
