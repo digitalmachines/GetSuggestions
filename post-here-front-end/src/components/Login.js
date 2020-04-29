@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, FormGroup, FormText, Button } from 'reactstrap';
 import {useState} from 'react'
 import { useHistory } from "react-router-dom";
@@ -8,7 +8,14 @@ import { connect } from 'react-redux';
 
 import '../styles/Login.scss'; 
 
+import App, { AppContext, LoginContext, LogoutContext } from '../App'; 
+
 function LoginForm(){
+
+    const status = useContext(AppContext); 
+    const loginFunction = useContext(LoginContext); 
+    const logoutFunction = useContext(LogoutContext); 
+    
     const [credentials, setCredentials] = useState({
         username: '',
         password: ''
@@ -28,6 +35,10 @@ function LoginForm(){
         axiosWithAuth()
         .post('/login', credentials)
         .then(res=>{
+            
+            const user = res.data;
+            loginFunction(user);
+
           console.log(res, 'retrieved the token')
           localStorage.setItem('token', res.data.token)
           localStorage.setItem('id', res.data.user.id) 
