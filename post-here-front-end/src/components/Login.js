@@ -6,6 +6,7 @@ import {axiosWithAuth} from '../utils/axiosWithAuth'
 import axios from 'axios'
 import { connect } from 'react-redux';
 
+import '../styles/Login.scss'; 
 
 function LoginForm(){
     const [credentials, setCredentials] = useState({
@@ -30,7 +31,8 @@ function LoginForm(){
           console.log(res, 'retrieved the token')
           localStorage.setItem('token', res.data.token)
           localStorage.setItem('id', res.data.user.id) 
-          history.push(`/protected/${res.data.user.id}`)
+          //history.push(`/protected/${res.data.user.id}`)
+          history.push("/dashboard"); 
         })
         .catch(res=>{
           console.log(res)
@@ -44,7 +46,7 @@ function LoginForm(){
 
     return(
         <>
-            <Form onSubmit = {login}>
+            <Form className='auth-form' onSubmit = {login}>
 
                 <FormGroup>
                     <FormText>Email:</FormText>
@@ -71,18 +73,15 @@ function LoginForm(){
                 </FormGroup>
 
                 <FormGroup>
-                    <Button color = 'danger' type='submit'>
+                    <Button color='danger' type='submit' size="lg">
                         Submit
                     </Button>
                 </FormGroup>
-
             </Form>
-            <p>don't have an account?</p>
-            <Button onClick={sendToRegister}>Click here to make one!</Button>
+            {/* <p>don't have an account?</p>
+            <Button onClick={sendToRegister}>Click here to make one!</Button> */}
         </>
-    )
-}
-
+    ); 
+}; 
 
 export default LoginForm;
-

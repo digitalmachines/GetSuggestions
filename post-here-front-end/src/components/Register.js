@@ -35,7 +35,6 @@ function Register(){
         })
     }
     
-
     return(
         <>
             <Form onSubmit = {register}>
