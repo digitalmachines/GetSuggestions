@@ -4,6 +4,7 @@ import {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 import axios from 'axios'
+import { connect } from 'react-redux';
 
 
 function LoginForm(){
@@ -28,7 +29,8 @@ function LoginForm(){
         .then(res=>{
           console.log(res, 'retrieved the token')
           localStorage.setItem('token', res.data.token)
-          history.push(`/protected/${res.data.id}`)
+          localStorage.setItem('id', res.data.user.id) 
+          history.push(`/protected/${res.data.user.id}`)
         })
         .catch(res=>{
           console.log(res)
@@ -79,6 +81,8 @@ function LoginForm(){
             <Button onClick={sendToRegister}>Click here to make one!</Button>
         </>
     )
-} 
+}
+
+
 export default LoginForm;
 

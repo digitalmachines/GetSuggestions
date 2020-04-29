@@ -1,25 +1,23 @@
 const initialState = {
-    name: '',
-    username: '',
-    email: '',
-    savedPosts: [],
+    posts: [],
     isFetching: false,
     error: ''
 }
 
-export const userReducer = (state = initialState, action) =>{
+export const postsReducer = (state = initialState, action) =>{
     switch (action.type){
-        case 'FETCH_START':
+        case 'FETCH_POSTS_START':
             return{
                 ...state,
-                isFetching:true
+                isFetching: true
             }
-        case 'FETCH_SUCCESS':
+        case 'FETCH_POSTS_SUCCESS':
             return{
                 ...state,
+                posts: [...action.payload],
                 isFetching: false
             }
-        case 'FETCH_ERROR':
+        case 'FETCH_POSTS_ERROR':
             return{
                 ...state,
                 isFetching: false,
