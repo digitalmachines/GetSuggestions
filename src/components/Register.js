@@ -3,6 +3,8 @@ import { Form, FormGroup, FormText, Dropdown, DropdownItem, DropdownToggle, Drop
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 
+import '../styles/Register.scss'; 
+
 function Register(){
 
     const [formValues, setFormValues] = useState({
@@ -37,7 +39,7 @@ function Register(){
     
     return(
         <>
-            <Form onSubmit = {register}>
+            <Form className='register-form' onSubmit = {register}>
                 <FormGroup>
                     <FormText>Name:</FormText>
                     <label htmlFor = 'name'>
@@ -83,7 +85,7 @@ function Register(){
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <Button type = 'submit'>
+                    <Button type = 'submit' size='lg' color='primary'>
                         Submit
                     </Button>
                 </FormGroup>
