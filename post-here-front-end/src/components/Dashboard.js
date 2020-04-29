@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {fetchUser,fetchPosts} from '../store/actions'
 import {connect} from 'react-redux'
+import NewPostForm from './NewPostForm'
 
 const Dashboard = (props)=>{
     console.log(props,"dashboard props")
@@ -13,7 +14,12 @@ const Dashboard = (props)=>{
 
 
     return(
-        <h1>dashboard</h1>
+        <>
+        <h3>Welcome {props.user.username}</h3>
+        <h4>fill this out to make a new post</h4>
+        <NewPostForm/>
+        <h4>Past Posts</h4>
+        </>
     )
 }
 
@@ -21,8 +27,9 @@ const mapStateToProps = state =>{
     console.log(state,"state in mapstatetoprops")
     return{
         user: {...state.userState.user},
-        posts:[],
-        isFetching: state.isFetching,
+        posts:[...state.postsState.posts],
+        isFetchingUser: state.userState.isFetching,
+        isFetchingPosts: state.postsState.isFetching,
         error: state.error
     }
 }
