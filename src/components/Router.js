@@ -12,6 +12,7 @@ import Profile from './Profile';
 import CreatePost from './CreatePost'; 
 import NewPostForm from './NewPostForm'; 
 import PastPosts from './PastPosts';
+import DisplayPost from './DisplayPost';
 
 function Router(){
 return(
@@ -29,6 +30,7 @@ return(
                         <Route path="/dashboard" component={Dashboard}/>
                         <Route path="/profile" component={Profile}/>
                         <Route path="/create-post" component={CreatePost}/>
+                        <Route path="/display-post" component={DisplayPost}/>
                         {/* <Route path="/create-post" component={CreatePost}/> */}
                         <Route path="/logout" component={Login}/>
                     </Switch>

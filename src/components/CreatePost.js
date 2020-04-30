@@ -5,14 +5,14 @@ import { Button, FormGroup, Label } from "reactstrap";
 import axios from 'axios'; 
 
 import '../styles/CreatePost.scss'; 
-import { AppContext } from '../App';
+import { AppContext, PostContext } from '../App';
 
 function CreatePost(){
 
   const [post, setPost] = useState({ post_title: '', post_text: ''})
   const history = useHistory();
   const user = useContext(AppContext); 
-    console.log(user); 
+  const setPostId = useContext(PostContext); 
 
   const { handleSubmit, register, errors } = useForm({
         defaultValues: { category: "Choose one" }
@@ -24,7 +24,8 @@ function CreatePost(){
     { headers:{Authorization: user.token }})
         .then(response => {
             console.log(response); 
-            history.push("/dashboard");
+            setPostId(response.data.message[0].id)
+            history.push('/display-post')
         })
         .catch(error => {
             console.log(error); 
