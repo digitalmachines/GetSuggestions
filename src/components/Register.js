@@ -35,7 +35,7 @@ function Register(){
         .post('https://post-here-subreddit.herokuapp.com/api/auth/register', formValues)
         .then(res=>{
             console.log(res)
-            const user = res.response.data; 
+            const user = res.data.response; 
             console.log(user); 
             login(user); 
             history.push('/dashboard'); 
