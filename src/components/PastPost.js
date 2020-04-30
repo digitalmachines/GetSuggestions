@@ -10,9 +10,10 @@ const PastPost = (props)=>{
   const toggle = () => setIsOpen(!isOpen);
 
     const deleteHandler = e => {
-        
+        e.preventDefault()
         console.log('delete event')
         props.deletePost(props.postId)
+        props.deleteSaved(props.postId)
     }
 
     return(

@@ -1,5 +1,5 @@
 import {axiosWithAuth} from '../../utils/axiosWithAuth'
-
+import axios from 'axios'
 
 export const fetchUser = (id) =>{
     
@@ -34,21 +34,23 @@ export const fetchPosts = (id) =>{
 
 }
 
-export const savePost = (post,id) =>{
+export const fetchSuggestions = (post) =>{
+    console.log(post,"post being passed to ds")
     return dispatch => {
-        dispatch({type: 'SAVE_POST_START'})
-        axiosWithAuth()
-        .delete(`https://post-here-subreddit.herokuapp.com/api/users/${id}/posts/`)
+        dispatch({type: 'FETCH_SUGGESTIONS_START'})
+        axios 
+        .post('https://sheltered-scrubland-21243.herokuapp.com/predict.json', post) 
         .then(res=>{
-            console.log(res)
-            dispatch({type: 'SAVE_POST_SUCCESS', payload: post})
+            console.log(res,"sugg response")
+            dispatch({type: 'FETCH_SUGGESTIONS_SUCCESS', payload: post})
         })
         .catch(err=>{
-            console.log(err)
-            dispatch({type: 'SAVE_POST_ERROR', payload: err})
+            console.log(err,"sugg error")
+            dispatch({type: 'FETCH_SUGGESTIONS_ERROR', payload: err})
         })
     }    
 }
+
 
 /*export const deletePost = (postId,id) =>{
     
