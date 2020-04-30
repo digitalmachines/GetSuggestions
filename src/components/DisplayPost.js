@@ -26,7 +26,7 @@ function DisplayPost(){
             })
     }, []); 
 
-        function queryAlgorithm(){
+        function getPrediction(){
             axios.post(`https://sheltered-scrubland-21243.herokuapp.com/predict.json`, post)
                 .then(response => {
                     console.log(response.data); 
@@ -57,7 +57,7 @@ function DisplayPost(){
                             return <CardText key={probability.id}>{probability}%</CardText>
                         })
                         }
-                        <Button color='primary' onClick={queryAlgorithm}>Get New Prediction!</Button>
+                        <Button color='primary' onClick={getPrediction}>Get New Prediction!</Button>
                     </CardBody>
                 </Card>
                 </Col>
