@@ -25,7 +25,7 @@ function Header(props){
                         <Link to="/create-post">Create Post</Link>
                         <Link to="/logout">Logout</Link>
                         </>
-                    ) : (
+                    ) : ( 
                         <> 
                         <Link to="/login">Login</Link>
                         <Link to="/register">Register</Link>
