@@ -3,43 +3,17 @@ import { Form, FormGroup, FormText, Button } from 'reactstrap';
 import axios from 'axios'
 
 const NewPostForm = (props)=>{
-    const [formValues, setFormValues] = useState({
-        title: '',
-        text: ''
-    })
-
-    const handleChange = e=>{
-        e.preventDefault();
-        setFormValues({
-            ...formValues,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleSubmit = e=>{
-        e.preventDefault()
-        console.log(formValues)
-        axios
-        .post("https://sheltered-scrubland-21243.herokuapp.com/predict.json",formValues )
-        .then(res=>{
-            console.log(res)
-        })
-        .catch(err=>{
-            console.log(err,"error thrown")
-        })
-    }
-
-
+    console.log(props,'newPost props')
     return(
-            <Form onSubmit = {handleSubmit}>
+            <Form onSubmit = {props.handlePostSubmit}>
                 <FormGroup>
                     <FormText>Title:</FormText>
                     <label htmlFor = 'title'>
                         <input 
                             type="text"
-                            name="title"
-                            value={formValues.title}
-                            onChange={handleChange} 
+                            name="post_title"
+                            value={props.formValues.post_title}
+                            onChange={props.handleChange} 
                         />
                     </label>
                 </FormGroup>
@@ -48,14 +22,14 @@ const NewPostForm = (props)=>{
                     <label htmlFor = 'postContent'>
                         <input 
                             type="textarea"
-                            name="text"
-                            value={formValues.text}
-                            onChange={handleChange}  
+                            name="post_text"
+                            value={props.formValues.post_text}
+                            onChange={props.handleChange}  
                         />
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <Button color = 'danger' type='submit'>
+                    <Button color = 'warning' type='submit'>
                         Submit
                     </Button>
                 </FormGroup>
