@@ -4,18 +4,15 @@ import {fetchUser,fetchPosts} from '../store/actions'
 import {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import {axiosWithAuth} from '../utils/axiosWithAuth'
-import axios from 'axios'
 import { connect } from 'react-redux';
 
 import '../styles/Login.scss'; 
 
-import App, { AppContext, LoginContext, LogoutContext } from '../App'; 
+import { LoginContext } from '../App'; 
 
 function LoginForm(props){
 
-    const status = useContext(AppContext); 
     const loginFunction = useContext(LoginContext); 
-    const logoutFunction = useContext(LogoutContext); 
     
     const [credentials, setCredentials] = useState({
         username: '',
@@ -50,10 +47,6 @@ function LoginForm(props){
           alert('the username or password is incorrect')
         })
       }
-
-    const sendToRegister =()=>{
-        history.push('/register')
-    }
 
     return(
         <>

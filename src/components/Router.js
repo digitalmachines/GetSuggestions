@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'; 
+import { BrowserRouter, Route, Switch } from 'react-router-dom'; 
 
 import Header from './Header'; 
 import Login from './Login'; 
@@ -9,6 +9,8 @@ import Register from './Register';
 import PrivateRoute from '../utils/PrivateRoute'; 
 import Dashboard from './Dashboard'; 
 import Profile from './Profile'; 
+import NewPostForm from './NewPostForm'; 
+import PastPosts from './PastPosts';
 
 function Router(){
 return(
@@ -25,6 +27,7 @@ return(
                         <Route path="/logout" component={Logout}/>
                         <Route path="/dashboard" component={Dashboard}/>
                         <Route path="/profile" component={Profile}/>
+                        <Route path="/create-post" component={NewPostForm}/>
                         {/* <Route path="/create-post" component={CreatePost}/> */}
                         <Route path="/logout" component={Login}/>
                     </Switch>
