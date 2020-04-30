@@ -19,7 +19,12 @@ function Header(props){
                 </h1>
                 <div>
                     { user ? (
+                        <>
+                        <Link to="/dashboard">Dashboard</Link>
+                        <Link to="/profile">Profile</Link>
+                        <Link to="/create-post">Create Post</Link>
                         <Link to="/logout">Logout</Link>
+                        </>
                     ) : (
                         <> 
                         <Link to="/register">Register</Link>
