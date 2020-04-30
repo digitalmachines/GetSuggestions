@@ -10,7 +10,8 @@ function DisplayPost(){
     const user = useContext(AppContext); 
     const postId = useContext(PostIDContext); 
     const [post, setPost] = useState({title: '', text: ''}); 
-    const [predictions, setPrediction] = useState({probabilities: [], subreddits: []})
+    let data = [];
+    let subreddits = []; 
 
     useEffect(() => {
         axios.get(`https://post-here-subreddit.herokuapp.com/api/users/${user.id}/posts/${postId}`, 
@@ -20,28 +21,34 @@ function DisplayPost(){
                 const post = { title: response.data.response[0].post_title, text: response.data.response[0].post_text }
                 setPost(post); 
                 console.log(post); 
+                getPrediction(); 
             })
             .catch(error => {
                 console.log(error); 
             })
     }, []); 
 
-        function getPrediction(){
-            axios.post(`https://sheltered-scrubland-21243.herokuapp.com/predict.json`, post)
+        async function getPrediction(){
+            await axios.post(`https://sheltered-scrubland-21243.herokuapp.com/predict.json`, post)
                 .then(response => {
                     console.log(response.data); 
-                    setPrediction(response.data); 
+                    data = response.data; 
                 })
                 .catch(error => {
                     console.log(error); 
                 });    
-        }
+        
+                for(let i=0; i<data.subreddits.length;i++){
+                    subreddits[i] = {id: i, subreddit: data.subreddits[i], probability: data.probabilities[i]*100}; 
+                }
+                console.log(subreddits); 
+            }
 
     return(
         <Container className='post'>
                 <Col>
                 <Card>
-                    <CardTitle>Post</CardTitle>
+                    <CardTitle>Post Title</CardTitle>
                     <CardSubtitle>{user.username}</CardSubtitle>
                     <CardHeader>{post.title}</CardHeader>
                     <CardBody>
@@ -49,14 +56,9 @@ function DisplayPost(){
                         <CardText>{post.text}</CardText>
                         <CardTitle>Predictions: </CardTitle>
                         { 
-                        predictions.subreddits.map(subreddit => {
-                            return <CardText key={subreddit.id}>{subreddit}</CardText>
-                        })}
-                        {
-                        predictions.probabilities.map(probability => {
-                            return <CardText key={probability.id}>{probability}%</CardText>
-                        })
-                        }
+                        subreddits.map(item => (
+                            <CardText key={item.id}>{item.subreddit}</CardText>
+                        ))}
                         <Button color='primary' onClick={getPrediction}>Get New Prediction!</Button>
                     </CardBody>
                 </Card>
