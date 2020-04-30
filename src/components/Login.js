@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Form, FormGroup, FormText, Button } from 'reactstrap';
+import {fetchUser,fetchPosts} from '../store/actions'
 import {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import {axiosWithAuth} from '../utils/axiosWithAuth'
@@ -10,7 +11,7 @@ import '../styles/Login.scss';
 
 import App, { AppContext, LoginContext, LogoutContext } from '../App'; 
 
-function LoginForm(){
+function LoginForm(props){
 
     const status = useContext(AppContext); 
     const loginFunction = useContext(LoginContext); 
@@ -38,12 +39,11 @@ function LoginForm(){
             
             const user = res.data;
             loginFunction(user);
-
-          console.log(res, 'retrieved the token')
-          localStorage.setItem('token', res.data.token)
-          localStorage.setItem('id', res.data.user.id) 
-          //history.push(`/protected/${res.data.user.id}`)
-          history.push("/dashboard"); 
+            console.log(res, 'retrieved the token')
+            localStorage.setItem('token', res.data.token)
+            props.fetchUser(res.data.user.id)
+            props.fetchPosts(res.data.user.id)
+            history.push("/dashboard"); 
         })
         .catch(res=>{
           console.log(res)
@@ -95,4 +95,4 @@ function LoginForm(){
     ); 
 }; 
 
-export default LoginForm;
+export default connect(null,{fetchUser,fetchPosts})(LoginForm);

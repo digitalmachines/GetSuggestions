@@ -5,7 +5,7 @@ import axios from 'axios'
 const NewPostForm = (props)=>{
     const [formValues, setFormValues] = useState({
         title: '',
-        postContent: ''
+        text: ''
     })
 
     const handleChange = e=>{
@@ -17,7 +17,16 @@ const NewPostForm = (props)=>{
     }
 
     const handleSubmit = e=>{
-        console.log(formValues,"new post!")
+        e.preventDefault()
+        console.log(formValues)
+        axios
+        .post("https://sheltered-scrubland-21243.herokuapp.com/predict.json",formValues )
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err,"error thrown")
+        })
     }
 
 
@@ -39,8 +48,8 @@ const NewPostForm = (props)=>{
                     <label htmlFor = 'postContent'>
                         <input 
                             type="textarea"
-                            name="postContent"
-                            value={formValues.postContent}
+                            name="text"
+                            value={formValues.text}
                             onChange={handleChange}  
                         />
                     </label>

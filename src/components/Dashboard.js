@@ -5,14 +5,14 @@ import NewPostForm from './NewPostForm'
 import PastPosts from './PastPosts'
 
 const Dashboard = (props)=>{
-    console.log(props,"dashboard props")
-    const id = localStorage.getItem('id');
+   // console.log(props,"dashboard props")
+    
 
     useEffect(()=>{
-        props.fetchUser(id)
-        props.fetchPosts(id)
+        props.fetchUser(props.user.id)
+        props.fetchPosts(props.user.id)
     },[])
-
+    
 
     return(
         <>
@@ -21,7 +21,7 @@ const Dashboard = (props)=>{
         <NewPostForm/>
         <h4>Past Posts</h4>
         {props.posts.length > 0 &&
-            <PastPosts posts = {props.posts}/>
+            <PastPosts userId = {props.user.id} posts = {props.posts}/>
         }
         
         </>
@@ -30,7 +30,7 @@ const Dashboard = (props)=>{
 }
 
 const mapStateToProps = state =>{
-    console.log(state,"state in mapstatetoprops")
+    
     return{
         user: {...state.userState.user},
         posts:[...state.postsState.posts],
