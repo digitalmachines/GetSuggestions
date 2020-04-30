@@ -3,7 +3,7 @@ import { Form, FormGroup, FormText, Button } from 'reactstrap';
 import axios from 'axios'
 
 const NewPostForm = (props)=>{
-    console.log(props,'newPost props')
+    //console.log(props,'newPost props')
     return(
             <Form onSubmit = {props.handlePostSubmit}>
                 <FormGroup>
@@ -29,6 +29,9 @@ const NewPostForm = (props)=>{
                     </label>
                 </FormGroup>
                 <FormGroup>
+                <Button color = 'warning' onClick={props.handleSuggestion}>
+                        Get Suggestions
+                    </Button>
                     <Button color = 'warning' type='submit'>
                         Submit
                     </Button>

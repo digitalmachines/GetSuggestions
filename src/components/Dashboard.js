@@ -1,5 +1,5 @@
 import React, {useEffect,useState } from 'react'
-import {fetchUser,fetchPosts} from '../store/actions'
+import {fetchUser,fetchPosts,fetchSuggestions} from '../store/actions'
 import {connect} from 'react-redux'
 import NewPostForm from './NewPostForm'
 import PastPosts from './PastPosts'
@@ -46,8 +46,17 @@ const Dashboard = (props)=>{
         })
     }
 
-    const handleDelete = (postId)=>{
-        axiosWithAuth()
+    const handleSuggestion = e=>{
+        e.preventDefault()
+        const newPost = JSON.stringify({
+            title: postFormValues.post_title,
+            text: postFormValues.post_text
+        })
+        props.fetchSuggestions(newPost)
+    }
+
+    const handleDelete = async(postId)=>{
+        await axiosWithAuth()
         .delete(`https://post-here-subreddit.herokuapp.com/api/users/${props.user.id}/posts/${postId}`)
         .then(res=>{
             console.log(res)
@@ -68,6 +77,7 @@ const Dashboard = (props)=>{
                 <NewPostForm
                     handleChange = {handleChange}
                     handlePostSubmit = {handlePostSubmit}
+                    handleSuggestion={handleSuggestion}
                     formValues = {postFormValues}
                 />
                 <h4>Past Posts</h4>
@@ -90,10 +100,12 @@ const mapStateToProps = state =>{
     return{
         user: {...state.userState.user},
         posts:[...state.postsState.posts],
+        suggestions:{...state.suggestionState.suggestions},
+        isFetchingSuggestion: state.suggestionState.isFetching,
         isFetchingUser: state.userState.isFetching,
         isFetchingPosts: state.postsState.isFetching,
         error: state.error
     }
 }
 
-export default connect(mapStateToProps,{fetchPosts,fetchUser})(Dashboard)
+export default connect(mapStateToProps,{fetchPosts,fetchUser,fetchSuggestions})(Dashboard)
