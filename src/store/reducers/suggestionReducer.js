@@ -18,6 +18,7 @@ export const suggestionReducer = (state = initialState, action) =>{
                 isFetching: false
             }
         case 'FETCH_SUGGESTIONS_ERROR':
+            console.log('suggestion error from reducer')
             return{
                 ...state,
                 isFetching: false,

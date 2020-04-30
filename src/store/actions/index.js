@@ -39,11 +39,7 @@ export const fetchSuggestions = (post) =>{
     return dispatch => {
         dispatch({type: 'FETCH_SUGGESTIONS_START'})
         axios 
-        .post('https://sheltered-scrubland-21243.herokuapp.com/predict.json', post, 
-        {headers:{
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'}
-        }) 
+        .post('https://sheltered-scrubland-21243.herokuapp.com/predict.json', post) 
         .then(res=>{
             console.log(res,"sugg response")
             dispatch({type: 'FETCH_SUGGESTIONS_SUCCESS', payload: post})

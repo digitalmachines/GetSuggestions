@@ -4,8 +4,16 @@ import axios from 'axios'
 
 const NewPostForm = (props)=>{
     //console.log(props,'newPost props')
+
+    const submit = e =>{
+        e.preventDefault();
+        props.saveNew()
+        props.handlePostSubmit()
+        
+    }
+
     return(
-            <Form onSubmit = {props.handlePostSubmit}>
+            <Form onSubmit = {submit}>
                 <FormGroup>
                     <FormText>Title:</FormText>
                     <label htmlFor = 'title'>
@@ -31,7 +39,7 @@ const NewPostForm = (props)=>{
                 <FormGroup>
                 <Button color = 'warning' onClick={props.handleSuggestion}>
                         Get Suggestions
-                    </Button>
+                </Button>
                     <Button color = 'warning' type='submit'>
                         Submit
                     </Button>
