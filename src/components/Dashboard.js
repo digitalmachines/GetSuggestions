@@ -3,12 +3,14 @@ import {fetchUser,fetchPosts,fetchSuggestions} from '../store/actions'
 import {connect} from 'react-redux'
 import NewPostForm from './NewPostForm'
 import PastPosts from './PastPosts'
+import SubReddits from './SubReddits'
 import {axiosWithAuth} from '../utils/axiosWithAuth'
+import axios from 'axios'
 import '../styles/Dashboard.scss'
 
 
 const Dashboard = (props)=>{
-    console.log(props,"dashboard props")
+    //console.log(props,"dashboard props")
 
 
    useEffect(()=>{
@@ -18,20 +20,24 @@ const Dashboard = (props)=>{
     },[])
 
     const [savedPosts, setSavedPosts] = useState(props.posts)
-   
+    const [subreddits,setSubReddits] = useState([])
     const [postFormValues, setPostFormValues] = useState({
         post_title: '',
         post_text: ''
     })
 
+     //for local state
+   const saveNew =()=>{
+    setSavedPosts([...savedPosts,postFormValues])
+    }
+
     //for local state
     const deleteSaved = (postId)=>{
-     setSavedPosts(savedPosts.filter(item=> item.id !== postId))
-   }
-   //for local state
-   const saveNew =()=>{
-        setSavedPosts([...savedPosts,props.formValues])
-   }
+        if(savedPosts.length>0){
+        setSavedPosts(savedPosts.filter(item=> item.id !== postId))
+        }    
+    }
+   
 
     const handleChange = e=>{
         e.preventDefault();
@@ -43,7 +49,6 @@ const Dashboard = (props)=>{
 
     //for backend
     const handlePostSubmit =()=>{
-        
         console.log(localStorage.getItem('token'))
         axiosWithAuth()
         .post(`https://post-here-subreddit.herokuapp.com/api/users/${props.user.id}/posts/`,postFormValues)
@@ -59,6 +64,7 @@ const Dashboard = (props)=>{
             console.log(err,"post error")
         })
     }
+
         
     const handleDelete = async(postId)=>{
                 await axiosWithAuth()
@@ -73,13 +79,30 @@ const Dashboard = (props)=>{
                  
     }
 
-    const handleSuggestion = e=>{
-        e.preventDefault()
+    /*const handleSuggestion = async()=>{
+       
         const newPost = JSON.stringify({
             "title": `${postFormValues.post_title}`,
             "text": `${postFormValues.post_text}`
         })
-        props.fetchSuggestions(newPost)
+        await props.fetchSuggestions(newPost)
+        await setSubReddits(props.suggestions)
+        console.log(subreddits)
+    }*/
+    const handleSuggestion = ()=>{
+        const newPost = JSON.stringify({
+            "title": `${postFormValues.post_title}`,
+            "text": `${postFormValues.post_text}`
+        })
+        axios 
+        .post('https://sheltered-scrubland-21243.herokuapp.com/predict.json', newPost) 
+        .then(res=>{
+            console.log(res,"sugg response")
+            setSubReddits(res.data)
+        })
+        .catch(err=>{
+            console.log(err,"sugg error")
+        })
     }
 
 
@@ -98,9 +121,12 @@ const Dashboard = (props)=>{
                     handleSuggestion={handleSuggestion}
                     formValues = {postFormValues}
                 />
-                <h4>Past Posts</h4>
-            </div>
-
+                
+                {subreddits.length > 0 &&
+                <SubReddits
+                    data = {subreddits}
+                />}
+            <h4>Past Posts</h4>
             {props.posts.length > 0 &&
                 <PastPosts
                     deleteSaved = {deleteSaved} 
@@ -108,7 +134,7 @@ const Dashboard = (props)=>{
                     posts = {props.posts}
                 />
             }
-        
+        </div>
         </div>
 
     )

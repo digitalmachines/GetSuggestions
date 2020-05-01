@@ -1,5 +1,5 @@
 const initialState = {
-    suggestions: {},
+    suggestions: [],
     isFetching: false,
     error: ''
 }
@@ -14,7 +14,7 @@ export const suggestionReducer = (state = initialState, action) =>{
         case 'FETCH_SUGGESTIONS_SUCCESS':
             return{
                 ...state,
-                suggestions: {...action.payload},
+                suggestions: [...action.payload],
                 isFetching: false
             }
         case 'FETCH_SUGGESTIONS_ERROR':
