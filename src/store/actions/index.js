@@ -42,7 +42,7 @@ export const fetchSuggestions = (post) =>{
         .post('https://sheltered-scrubland-21243.herokuapp.com/predict.json', post) 
         .then(res=>{
             console.log(res,"sugg response")
-            dispatch({type: 'FETCH_SUGGESTIONS_SUCCESS', payload: post})
+            dispatch({type: 'FETCH_SUGGESTIONS_SUCCESS', payload: res.data})
         })
         .catch(err=>{
             console.log(err,"sugg error")
