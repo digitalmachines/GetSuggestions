@@ -33,11 +33,9 @@ function LoginForm(props){
         axiosWithAuth()
         .post('/login', credentials)
         .then(res=>{
-            
             const user = res.data;
+            localStorage.setItem('token', res.data.token); 
             loginFunction(user);
-            console.log(res, 'retrieved the token')
-            localStorage.setItem('token', res.data.token)
             props.fetchUser(res.data.user.id)
             props.fetchPosts(res.data.user.id)
             history.push("/dashboard"); 

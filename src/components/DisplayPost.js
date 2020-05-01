@@ -8,6 +8,7 @@ import '../styles/DisplayPost.scss';
 function DisplayPost(){
    
     const user = useContext(AppContext); 
+    console.log(user); 
     const postId = useContext(PostIDContext); 
     const [post, setPost] = useState({title: '', text: ''}); 
     let data = [];
@@ -19,7 +20,7 @@ function DisplayPost(){
         {headers: { Authorization: user.token }})
             .then(response => {
                 console.log(response); 
-                const post = { title: response.data.response[0].post_title, text: response.data.response[0].post_text }
+                const post = { id: response.data.response[0].id, title: response.data.response[0].post_title, text: response.data.response[0].post_text }
                 setPost(post); 
                 console.log(post); 
                 getPrediction(); 
@@ -50,19 +51,18 @@ function DisplayPost(){
     
     return(
         <Container className='post'>
-                <Col>
-                <Card>
-                    <CardTitle>Post Title</CardTitle>
-                    <CardSubtitle>{user.username}</CardSubtitle>
-                    <CardHeader>{post.title}</CardHeader>
-                    <CardBody>
-                        <CardImg></CardImg>
-                        <CardText>{post.text}</CardText>
-                        <CardTitle>Predictions: </CardTitle>
+            <Col>
+                <Card body className="text-center" outline color="primary">
+                    <CardHeader body="primary" color="primary" tag="h3">Post Title: {post.title}</CardHeader>
+                    <CardBody outline="primary">
+                        <CardTitle>Post ID#: {post.id}</CardTitle>
+                        <CardTitle>Username: {user.user.username}</CardTitle>
+                        <CardText>Post Text: {post.text}</CardText>
+                        <CardHeader tag="h4">PostHere Algorithm Analysis:</CardHeader>
                         {posts.map(item => (
                             <CardText>{item.subreddit} {item.probability}</CardText>
                         ))}
-                        {/* <Button color='primary'>Get New Prediction!</Button> */}
+                        <Button size="lg"   color='primary'>Save algorithm analysis</Button>
                     </CardBody>
                 </Card>
                 </Col>
