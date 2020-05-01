@@ -5,6 +5,7 @@ import {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import {axiosWithAuth} from '../utils/axiosWithAuth'
 import { connect } from 'react-redux';
+import { TextField } from '@material-ui/core/'; 
 
 import '../styles/Login.scss'; 
 
@@ -49,39 +50,34 @@ function LoginForm(props){
     return(
         <>
             <Form className='auth-form' onSubmit = {login}>
-
                 <FormGroup>
-                    <FormText>Email:</FormText>
-                    <label htmlFor = 'email'>
-                        <input
+                        <TextField
+                            variant="outlined"
+                            label="username"
                              type="text"
                              name="username"
                              value={credentials.username}
                              onChange={handleChange}
                         />
-                    </label>
                 </FormGroup>
 
                 <FormGroup>
-                    <FormText>Password:</FormText>
-                    <label htmlFor = 'password'>
-                        <input 
+                        <TextField
+                            label="password"
+                            variant="outlined" 
                             type="password"
                             name="password"
                             value={credentials.password}
                             onChange={handleChange}
                         />
-                    </label>
                 </FormGroup>
 
                 <FormGroup>
-                    <Button color='danger' type='submit' size="lg">
+                    <Button color='primary' type='submit' size="lg">
                         Submit
                     </Button>
                 </FormGroup>
             </Form>
-            {/* <p>don't have an account?</p>
-            <Button onClick={sendToRegister}>Click here to make one!</Button> */}
         </>
     ); 
 }; 
