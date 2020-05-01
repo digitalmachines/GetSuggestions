@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import Router from './components/Router'; 
+import React, { useState } from 'react';
+import Router from './components/Router';  
 
 import './App.css';
 
 function App() {
 
-  const [status, setStatus] = useState(null); 
+  const [user, setUser] = useState(null); 
   const [postId, setPostID] = useState(null); 
 
   function setPost(id){
@@ -13,15 +13,16 @@ function App() {
   }
 
   function login(user){
-    setStatus(user); 
+    setUser(user);     
   }
 
   function logout(){
-    setStatus(null); 
+    localStorage.removeItem('token'); 
+    setUser(null);  
   }
 
   return (
-        <AppContext.Provider value={status}>
+        <AppContext.Provider value={user}>
           <LoginContext.Provider value={login}>
             <LogoutContext.Provider value={logout}>
               <PostContext.Provider value={setPostID}>
