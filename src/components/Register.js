@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react';
 import { Form, FormGroup, FormText, Button } from 'reactstrap';
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
+import { TextField } from '@material-ui/core'; 
 
 import { LoginContext } from '../App'; 
 
@@ -49,9 +50,10 @@ function Register(){
         <>
             <Form className='register-form' onSubmit ={register}>
                 <FormGroup>
-                    <FormText>Name:</FormText>
                     <label htmlFor = 'name'>
-                        <input 
+                        <TextField
+                            variant="outlined"
+                            label="name" 
                             type="text"
                             name="name"
                             value={formValues.name}
@@ -60,9 +62,10 @@ function Register(){
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Username:</FormText>
                     <label htmlFor = 'username'>
-                        <input 
+                        <TextField 
+                            variant="outlined"
+                            label="username"
                             type="text"
                             name="username"
                             value={formValues.username}
@@ -71,9 +74,10 @@ function Register(){
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <FormText>E-Mail:</FormText>
                     <label htmlFor='email'>
-                        <input 
+                        <TextField
+                            variant="outlined"
+                            label="email" 
                             type="text"
                             name="email"
                             value={formValues.email}
@@ -82,9 +86,10 @@ function Register(){
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <FormText>Password:</FormText>
                     <label htmlFor='password'>
-                        <input 
+                        <TextField
+                            variant="outlined"
+                            label="password" 
                             type = 'password' 
                             name="password"
                             value={formValues.password}
@@ -93,8 +98,8 @@ function Register(){
                     </label>
                 </FormGroup>
                 <FormGroup>
-                    <Button type ='submit' size='lg' color='primary'>
-                        Submit
+                    <Button type='submit' size='lg' color='primary'>
+                        Register
                     </Button>
                 </FormGroup>
             </Form>
