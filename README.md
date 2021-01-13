@@ -1,4 +1,4 @@
-## Post Here for Reddit
+## GetSuggestions for subreddit
 
 An App to help you decide which subreddit to post in. 
 
